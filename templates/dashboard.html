@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Dashboard — CareerCompass IT</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050a12; --surface: #0c1524; --surface2: #111d30; --border: #1e3152;
+    --accent: #00d4ff; --accent2: #7c3aed; --accent3: #10b981; --warn: #f59e0b;
+    --text: #e2eaf6; --muted: #6b83a4;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { 
+    font-family:'DM Sans',sans-serif; 
+    background:var(--bg); 
+    color:var(--text); 
+    min-height:100vh; 
+  }
+  body::before { 
+    content:''; 
+    position:fixed; 
+    inset:0;
+    background: radial-gradient(ellipse 60% 50% at 20% 20%, rgba(0,212,255,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 60% at 80% 80%, rgba(124,58,237,0.07) 0%, transparent 60%);
+    pointer-events:none; 
+    z-index:0; 
+  }
+
+  nav {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(5,10,18,0.9);
+    backdrop-filter: blur(16px);
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo { 
+    font-family:'Syne',sans-serif; 
+    font-weight:800; 
+    font-size:1.35rem; 
+    letter-spacing:-0.5px;
+  }
+  .logo span { color:var(--accent); }
+
+  .nav-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), #0099cc);
+    color: #000;
+    font-weight: 700;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-header {
+    margin-bottom: 32px;
+  }
+
+  .page-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .page-subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  .profile-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #000;
+    flex-shrink: 0;
+  }
+
+  .profile-info h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+  }
+
+  .profile-meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s;
+  }
+
+  .stat-card:hover {
+    border-color: rgba(0, 212, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .history-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    transition: all 0.3s;
+  }
+
+  .history-item:hover {
+    border-color: var(--accent);
+  }
+
+  .history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .history-career {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .history-date {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .history-details {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .history-detail {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .history-detail strong {
+    color: var(--text);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--muted);
+  }
+
+  .empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  .loading {
+    text-align: center;
+    padding: 48px;
+    color: var(--muted);
+  }
+
+  .spinner {
+    border: 3px solid rgba(0, 212, 255, 0.1);
+    border-top: 3px solid var(--accent);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 16px;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .container, .nav-inner {
+      padding: 16px;
+    }
+
+    .profile-card {
+      flex-direction: column;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .page-title {
+      font-size: 1.5rem;
+    }
+
+    .stat-value {
+      font-size: 1.6rem;
+    }
+
+    .history-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .history-details {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Career<span>Compass</span> IT</div>
+    <div class="nav-actions">
+      <a href="/" class="btn btn-primary">← Take Assessment</a>
+      <button class="btn btn-secondary" onclick="handleLogout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <!-- Profile Card -->
+  <div class="profile-card" id="profileCard">
+    <div class="profile-avatar" id="profileAvatar">?</div>
+    <div class="profile-info">
+      <h2 id="profileName">Loading...</h2>
+      <div class="profile-meta">
+        <span id="profileUsername">@username</span> • 
+        <span id="profileJoined">Joined recently</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Assessments Taken</div>
+      <div class="stat-value" id="totalAssessments">0</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Resources Completed</div>
+      <div class="stat-value" id="completedResources">0</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Latest Career Path</div>
+      <div class="stat-value" id="latestCareer" style="font-size:1.2rem">—</div>
+    </div>
+  </div>
+
+  <!-- Assessment History -->
+  <div class="section">
+    <h2 class="section-title">📊 My Assessment History</h2>
+    <div id="historyContent" class="loading">
+      <div class="spinner"></div>
+      Loading your history...
+    </div>
+  </div>
+</div>
+
+<script>
+const careerNames = {
+  'ai': 'AI/ML Engineer',
+  'data': 'Data Scientist',
+  'dev': 'Full Stack Developer',
+  'cloud': 'Cloud/DevOps',
+  'cyber': 'Cybersecurity'
+};
+
+// Load user data on page load
+async function loadDashboard() {
+  try {
+    // Get auth status and user info
+    const authResponse = await fetch('/auth/status', { credentials: 'include' });
+    const authData = await authResponse.json();
+    
+    if (!authData.authenticated) {
+      window.location.href = '/login';
+      return;
+    }
+
+    // Update profile
+    const initials = authData.fullname.split(' ').map(n => n[0]).join('').toUpperCase();
+    document.getElementById('profileAvatar').textContent = initials;
+    document.getElementById('profileName').textContent = authData.fullname;
+    document.getElementById('profileUsername').textContent = '@' + authData.username;
+
+    // Load stats
+    const statsResponse = await fetch('/api/my-stats', { credentials: 'include' });
+    const stats = await statsResponse.json();
+    
+    document.getElementById('totalAssessments').textContent = stats.total_assessments || 0;
+    document.getElementById('completedResources').textContent = stats.completed_resources || 0;
+    document.getElementById('latestCareer').textContent = 
+      stats.latest_career ? careerNames[stats.latest_career] || stats.latest_career : '—';
+
+    // Load assessment history
+    const historyResponse = await fetch('/api/my-results', { credentials: 'include' });
+    const history = await historyResponse.json();
+    renderHistory(history);
+
+  } catch (error) {
+    console.error('Dashboard load error:', error);
+    document.getElementById('historyContent').innerHTML = 
+      '<p class="empty-state">Error loading dashboard data</p>';
+  }
+}
+
+function renderHistory(history) {
+  const container = document.getElementById('historyContent');
+  
+  if (history.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">📝</div>
+        <h3>No assessments yet</h3>
+        <p style="margin-top:8px">Take your first career assessment to see your results here!</p>
+        <a href="/" class="btn btn-primary" style="margin-top:20px">Start Assessment</a>
+      </div>
+    `;
+    return;
+  }
+
+  const html = history.map(result => {
+    const date = new Date(result.created_at);
+    const topCareer = careerNames[result.top_career] || result.top_career;
+    
+    return `
+      <div class="history-item">
+        <div class="history-header">
+          <div class="history-career">${topCareer}</div>
+          <div class="history-date">${date.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          })}</div>
+        </div>
+        <div class="history-details">
+          <div class="history-detail">
+            <strong>Persona:</strong> ${result.persona}
+          </div>
+          <div class="history-detail">
+            <strong>Education:</strong> ${result.education}
+          </div>
+          <div class="history-detail">
+            <strong>Score:</strong> ${result.scores[result.top_career] || '—'}/100
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  container.innerHTML = html;
+}
+
+async function handleLogout() {
+  if (confirm('Are you sure you want to logout?')) {
+    try {
+      const response = await fetch('/auth/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+      
+      if (response.ok) {
+        window.location.href = '/login';
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+      window.location.href = '/login';
+    }
+  }
+}
+
+// Load dashboard on page load
+loadDashboard();
+</script>
+
+</body>
+</html>

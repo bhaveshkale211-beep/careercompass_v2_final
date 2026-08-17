@@ -1,0 +1,147 @@
+📦 INSTALLATION
+
+1. Extract the ZIP file
+
+2. Install dependencies:
+   pip install -r requirements.txt
+
+3. Run the app:
+   python app.py
+
+4. Open browser:
+   http://localhost:5000
+
+🎯 COMPLETE USER FLOW
+
+1. CREATE ACCOUNT
+   ─────────────
+   • Go to http://localhost:5000 (redirects to login)
+   • Click "Sign Up" tab
+   • Enter your details:
+     - Full Name
+     - Username (unique, min 3 chars)
+     - Password (min 6 chars)
+   • Click "Create Account"
+   • You're automatically logged in!
+
+2. TAKE ASSESSMENT
+   ────────────────
+   • Select your profile type (undergraduate, graduate, etc.)
+   • Complete 5-step survey about your background
+   • Answer adaptive quiz questions (8-10 questions)
+   • View your personalized career results
+   • Explore learning roadmaps with free resources
+
+3. VIEW YOUR DASHBOARD
+   ───────────────────
+   • Click "📊 My Dashboard" in navigation (top right)
+   • See your profile card with:
+     - Avatar (your initials)
+     - Full name and username
+     - Join date
+   
+   • Check your statistics:
+     - Total assessments taken
+     - Resources completed
+     - Latest career path recommended
+   
+   • Review your assessment history:
+     - All past assessments
+     - Career recommended each time
+     - Dates and scores
+
+4. RETAKE ASSESSMENT
+   ─────────────────
+   • From dashboard, click "← Take Assessment"
+   • Your new results are added to your history
+   • Previous results are preserved
+   • Compare your journey over time
+
+5. TRACK YOUR PROGRESS
+   ───────────────────
+   • Database tracks your resource completion
+   • As you complete courses/resources, they're saved
+   • View your progress in the dashboard
+
+🔐 DEFAULT ACCOUNTS
+
+ADMIN ACCOUNT (Already Created):
+Username: admin
+Password: admin123
+
+⚠️ CHANGE THIS PASSWORD BEFORE SHARING!
+
+To change:
+1. Open database.py
+2. Find line 52-53
+3. Change "admin123" to your password
+4. Delete careercompass.db
+5. Run python app.py again
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📱 MOBILE RESPONSIVE
+
+WORKS PERFECTLY ON:
+✅ Desktop computers (1200px+)
+✅ Laptops (1024px - 1199px)
+✅ Tablets (768px - 1023px)
+✅ Mobile phones (< 768px)
+✅ Small phones (< 480px)
+
+MOBILE FEATURES:
+• Touch-friendly buttons
+• Single-column layouts
+• Readable text sizes
+• Optimized navigation
+• Swipe-friendly interfaces
+• Dashboard works great on mobile!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 PROJECT FILES
+
+careercompass_v2_final/
+├── app.py                     # 17 routes including dashboard
+├── database.py                # 3 tables + user tracking functions
+├── recommendation_engine.py   # Career scoring algorithm
+├── requirements.txt           # Flask, Flask-CORS
+├── README.md                  # Full documentation
+└── templates/
+    ├── login.html            # Login & registration
+    ├── index.html            # Main assessment (with dashboard link)
+    ├── dashboard.html        # ⭐ NEW: User dashboard
+    └── admin.html            # Admin panel
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎓 LEARNING VALUE
+
+This project teaches:
+• Flask web framework
+• User authentication with sessions
+• Database design with relationships
+• CRUD operations (Create, Read, Update, Delete)
+• RESTful API design
+• Frontend-backend integration
+• Security best practices
+• Responsive web design
+• User experience design
+• Session management
+• History tracking
+• Progress monitoring
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+                    🚀 READY TO EXPLORE!
+
+            Open http://localhost:5000 and start your
+                    IT career journey today!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+               Built with ❤️ for BCA Students
+                   Version 2.0 - Complete Edition
+                          March 2026
+
+    Features: Auth ✅ Dashboard ✅ History ✅ Progress ✅ Mobile ✅
