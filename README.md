@@ -1,6 +1,6 @@
 # CareerCompass IT
 
-A web-based career recommendation platform that helps users discover the best IT career path based on their background, skills, and goals. Built with Flask and SQLite.
+A web-based "Information Technology" career recommendation platform that helps users discover the best IT career path based on their background, skills, and goals. Built with Flask and SQLite.
 
 ---
 
